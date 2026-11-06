@@ -6,7 +6,7 @@ service cloud.firestore {
     // Solo Kiara y Matías (por UID). Pegá acá los UID de Authentication > Users.
     function isAdmin() {
       return request.auth != null
-        && request.auth.uid in ['PEGAR_UID_DE_KIARA', 'PEGAR_UID_DE_MATIAS'];
+        && request.auth.uid in ['3Ps00AsORJQAjLNidHbBYvoXRbn2', '0hOzRmd665etR7qpt3Czhma6bpU2'];
     }
 
     // Un cliente puede crear un pedido web "pendiente", sin cobros y con datos razonables.
