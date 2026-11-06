@@ -1,0 +1,57 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Solo Kiara y Matías (por UID). Pegá acá los UID de Authentication > Users.
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.uid in ['PEGAR_UID_DE_KIARA', 'PEGAR_UID_DE_MATIAS'];
+    }
+
+    // Un cliente puede crear un pedido web "pendiente", sin cobros y con datos razonables.
+    function validWebOrder() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(['number', 'source', 'status', 'customer', 'items', 'paymentMethod',
+                               'subtotal', 'shipping', 'total', 'customerTotal', 'pays', 'createdAt'])
+        && d.source == 'web'
+        && d.status == 'pendiente'
+        && d.pays is list && d.pays.size() == 0
+        && d.items is list && d.items.size() > 0 && d.items.size() <= 40
+        && d.customer is map && d.customer.name is string
+        && d.customer.name.size() > 1 && d.customer.name.size() < 120
+        && d.paymentMethod in ['transferencia', 'tarjeta']
+        && d.total is number && d.total >= 0 && d.total < 10000000;
+    }
+
+    // Catálogo: lo ve cualquiera, lo edita solo un socio.
+    match /products/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /productImages/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Pedidos: los crea cualquiera (pedido web), los ve y gestiona solo un socio.
+    match /orders/{id} {
+      allow create: if isAdmin() || validWebOrder();
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Costos, lotes, movimientos de caja y saldos: solo socios.
+    match /costs/{id} {
+      allow read, write: if isAdmin();
+    }
+    match /lots/{id} {
+      allow read, write: if isAdmin();
+    }
+    match /movements/{id} {
+      allow read, write: if isAdmin();
+    }
+    match /settings/{id} {
+      allow read, write: if isAdmin();
+    }
+  }
+}
