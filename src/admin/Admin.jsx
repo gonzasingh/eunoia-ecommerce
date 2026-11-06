@@ -12,7 +12,7 @@ export default function Admin() {
     return (
       <div id="crm">
         <h1>Zona de socios</h1>
-        <p>Esta parte es solo para Kiara y Matías. <Link to="/ingresar">Ingresar</Link></p>
+        <p>Esta parte es solo para socios. <Link to="/ingresar">Ingresar</Link></p>
       </div>
     );
   }
