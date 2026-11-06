@@ -37,7 +37,7 @@ export default function Login() {
   return (
     <div id="crm">
       <h1>Ingresar</h1>
-      <p className="mu">Acceso solo para Kiara y Matías.</p>
+      <p className="mu">Acceso solo para socios.</p>
       {user ? (
         <>
           <p className="er">Tu cuenta ({user.email}) no tiene acceso de socio.</p>
