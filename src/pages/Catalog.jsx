@@ -1,14 +1,10 @@
 import { useMemo } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
+import Banner from '../components/Banner';
 import ProductCard from '../components/ProductCard';
 import { useProducts } from '../context/ProductsContext';
 import { CATEGORIES } from '../utils/constants';
 
-const TILES = [
-  ['anillos', '/img/cat-06.jpg'],
-  ['aros', '/img/cat-27.jpg'],
-  ['collares', '/img/cat-33.jpg'],
-];
 const STEPS = [
   ['Elegí tus piezas', 'Mirá el catálogo completo'],
   ['Cargá tu envío', 'Código postal y dirección'],
@@ -41,24 +37,9 @@ export default function Catalog() {
     <>
       {home && (
         <>
-          <section className="hero">
-            <div>
-              <h1>Joyas en plata que acompañan todos los días</h1>
-              <p>
-                Anillos, aros, collares, pulseras y charms. Elegí tus piezas, sumalas al carrito y cerrá tu pedido por
-                WhatsApp con tus datos de envío.
-              </p>
-              <a className="btn" href="#productos">Ver productos</a>
-            </div>
-            <div className="tiles">
-              {TILES.map(([id, img]) => (
-                <Link key={id} to={`/category/${id}`} className="tile">
-                  <img src={img} alt="" />
-                  <span>{CATEGORIES[id]}</span>
-                </Link>
-              ))}
-            </div>
-          </section>
+          {/* El título visible de la home son las diapositivas del carrusel; este h1 es para lectores de pantalla y buscadores */}
+          <h1 className="sr-only">eunoia. Joyas en Plata 925</h1>
+          <Banner />
           <section className="how">
             {STEPS.map(([t, s], i) => (
               <div key={t}>
