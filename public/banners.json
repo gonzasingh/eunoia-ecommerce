@@ -1,0 +1,52 @@
+{
+  "slides": [
+    {
+      "id": "inicio",
+      "title": "Joyas en plata que acompañan todos los días",
+      "text": "Anillos, aros, collares, pulseras y charms. Elegí tus piezas, sumalas al carrito y cerrá tu pedido por WhatsApp con tus datos de envío.",
+      "buttonText": "Ver productos",
+      "link": "#productos",
+      "image": "/img/cat-27.jpg",
+      "imageAlt": "Aros de plata sobre una tarjeta de eunoia",
+      "imageFit": "cover",
+      "theme": "arena",
+      "active": true
+    },
+    {
+      "id": "anillos",
+      "title": "Anillos",
+      "text": "Plata 925 para sumar a tu día a día, solos o combinados.",
+      "buttonText": "Ver anillos",
+      "link": "/category/anillos",
+      "image": "/img/cat-06.jpg",
+      "imageAlt": "Anillo de plata sobre una pieza de cerámica",
+      "imageFit": "cover",
+      "theme": "grafito",
+      "active": true
+    },
+    {
+      "id": "aros",
+      "title": "Aros y abridores",
+      "text": "Desde abridores simples hasta aros colgantes con piedras.",
+      "buttonText": "Ver aros",
+      "link": "/category/aros",
+      "image": "/img/cat-29.jpg",
+      "imageAlt": "Aros colgantes de plata sobre un plato con forma de corazón",
+      "imageFit": "cover",
+      "theme": "niebla",
+      "active": true
+    },
+    {
+      "id": "collares",
+      "title": "Collares y dijes",
+      "text": "Cadenas y dijes delicados para regalar o regalarte.",
+      "buttonText": "Ver collares",
+      "link": "/category/collares",
+      "image": "/img/cat-33.jpg",
+      "imageAlt": "Collar de plata con un dije de cerezas sobre una tarjeta de eunoia",
+      "imageFit": "cover",
+      "theme": "arena",
+      "active": true
+    }
+  ]
+}

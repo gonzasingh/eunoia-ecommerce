@@ -47,16 +47,17 @@ Hecho con **React + Vite**, **Firebase** (Firestore + Authentication) y desplega
 ```
 eunoia-ecommerce/
 ├── public/img/            logos, íconos y fotos de las joyas (42 con foto previa)
+├── public/banners.json    diapositivas del carrusel del inicio (editable)
 ├── scripts/
 │   ├── seed.mjs           carga el inventario y las ventas del Excel en Firestore
 │   └── seed-data.json     80 productos, 3 lotes y 19 ventas del Excel
 ├── src/
 │   ├── admin/             panel de socios (Ventas, Stock, Caja, editor)
-│   ├── components/        encabezado, tarjetas, aviso, pie
+│   ├── components/        encabezado (navbar), carrusel del inicio, tarjetas, aviso, pie
 │   ├── context/           sesión, catálogo y carrito
 │   ├── hooks/             suscripción en tiempo real a Firestore
 │   ├── pages/             catálogo, ficha, carrito, login
-│   ├── services/          escrituras en Firestore (productos, pedidos, caja)
+│   ├── services/          escrituras en Firestore (productos, pedidos, caja) y lectura de banners
 │   ├── utils/             formato, envío, checkout, fotos
 │   ├── firebase.js        conexión a Firebase
 │   └── styles.css
@@ -194,6 +195,24 @@ Después de `npm install` aparece `package-lock.json`: dejalo en el repositorio.
 | Mails de los socios | `VITE_ADMIN_EMAILS` **y** los UID en `firestore.rules` |
 | Colores y tipografías | variables CSS al principio de `src/styles.css` |
 | Categorías de la tienda | `src/utils/constants.js` (`CATEGORIES`) |
+| Carrusel del inicio (textos, fotos, botones) | `public/banners.json` (ver abajo) |
+
+## Carrusel del inicio
+
+Las diapositivas del inicio no están escritas en el código: se leen de `public/banners.json`. Para cambiar, agregar o quitar una
+alcanza con editar ese archivo y volver a publicar. Cada diapositiva tiene:
+
+| Campo | Qué es |
+|---|---|
+| `title` | Título (obligatorio; sin título la diapositiva se descarta). |
+| `text`, `buttonText` | Texto de apoyo y texto del botón (opcionales). |
+| `link` | Adónde lleva el botón: una ruta de la tienda (`/category/aros`), un ancla de la página (`#productos`) o una URL `https://`. |
+| `image`, `imageAlt`, `imageFit` | Foto (por ejemplo `/img/cat-06.jpg`), su descripción para lectores de pantalla y `cover` (ocupa la mitad derecha) o `contain` (sin recortar). |
+| `theme` | Color de fondo: `arena`, `niebla` o `grafito`. |
+| `active`, `from`, `to` | `false` oculta la diapositiva; `from` / `to` (`AAAA-MM-DD`) la muestran solo en ese período. |
+
+Si se define la variable `VITE_BANNERS_URL`, el archivo se lee de esa URL (así se puede editar sin volver a publicar el sitio).
+Si no se puede leer, se muestra una diapositiva de respaldo para que el inicio nunca quede sin banner.
 
 ## Fotos subidas desde el panel
 
