@@ -5,8 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content="eunoia. Joyas en Plata 925. Anillos, aros, argollas, collares, pulseras y charms con envíos por Andreani a todo el país." />
-    <meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#151515" media="(prefers-color-scheme: dark)" />
+    <!-- Un único theme-color, sin atributo media; el script lo pasa a #151515 cuando el sistema está en modo oscuro.
+         Los colores son los de --bg en styles.css. -->
+    <meta name="theme-color" content="#FAFAFA" />
+    <script>
+      (function () {
+        var meta = document.querySelector('meta[name="theme-color"]');
+        var dark = window.matchMedia('(prefers-color-scheme: dark)');
+        function sync() { meta.setAttribute('content', dark.matches ? '#151515' : '#FAFAFA'); }
+        sync();
+        if (dark.addEventListener) dark.addEventListener('change', sync);
+        else if (dark.addListener) dark.addListener(sync);
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
